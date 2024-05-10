@@ -1,6 +1,6 @@
 # NBA 2023-24: An Statistical Overview
 
-## Planned completion: March 20th
+## Planned completion: May 17th
 
 
 # NBA Website Project
