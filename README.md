@@ -29,7 +29,7 @@ Follow these steps to contribute to the website:
 
 ## Contributors!
 ### Check out the people who worked on this project below: 
-- [Aditya][https://www.linkedin.com/in/aditya-kr-rao/]
-- [Austin][https://www.linkedin.com/in/austin-li-070654268]
+- [Aditya](https://www.linkedin.com/in/aditya-kr-rao/)
+- [Austin](https://www.linkedin.com/in/austin-li-070654268)
   
 # License: MIT
