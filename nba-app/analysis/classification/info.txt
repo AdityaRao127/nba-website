@@ -1,0 +1,6 @@
+1. Cluster teams based on characteristics 
+
+Find similar teams and put into 3 clusters:
+- Championship Favorites
+- Playoff Contendors
+- Rebuilding / Poorly performing teams
