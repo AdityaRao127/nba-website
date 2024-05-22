@@ -24,6 +24,17 @@ dist-ssr
 *.sw?
 
 .vercel
+# IDE specific files
+.idea/
+.vscode/
+coverage/
 
-/env
+# Lock files
+package-lock.json
+yarn.lock
+
+
+# probably not needed
+/env 
+.env 
 venv/
