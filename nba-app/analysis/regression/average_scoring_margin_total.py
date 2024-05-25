@@ -4,12 +4,12 @@ import pandas as pd
 import os
 from sklearn import datasets, linear_model
 
-efg_path = '../data/efg_pct/'
+efg_path = '../data/average_scoring_margin/'
 file_list = os.listdir(efg_path)
 
 efg_data_list = []
 
-## MEHTOD 1
+# MEHTOD 1
 for efgfile in file_list:
     full_path = os.path.join(efg_path, efgfile) # efg_path + file
     data = pd.read_csv(full_path)
@@ -22,7 +22,7 @@ efg_team_match = dict(zip(efg_data_array['Team'], efg_data_array['Statistic']))
 #print(efg_team_match) #remove later
 
 
-## METHOD 2
+# METHOD 2
 # Initialize an empty list to store DataFrames
 dataframes = []
 
@@ -31,6 +31,8 @@ for file in file_list:
         dataframes.append(df)
         print(f"Read {file}, content:\n{df.to_string()}")  # Print all rows
 
+
+# Scatter Plot
 season1 = 2003
 season2 = 2004
 for i in range(len(dataframes)):
@@ -40,8 +42,8 @@ for i in range(len(dataframes)):
     num_datasets = len(df[df["Rank"]=="1"].columns)
     colors = ['blue'] * num_datasets
     plt.scatter(df["Team"], df["Statistic"])
-    plt.title(f'Effective Field Goal Percentage from {season1} - {season2}')
-    plt.xlabel('Effective Field Goal Percentage')
+    plt.title(f'Average Scoring Margin from {season1} - {season2}')
+    plt.xlabel('Average Scoring Margin')
     plt.xticks(rotation=45)
     plt.ylabel('Team')
     plt.show()

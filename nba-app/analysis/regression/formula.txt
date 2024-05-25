@@ -2,4 +2,4 @@ our formula:
 (Reg. Season Win% x 0.15) + (Effective Field Goal Percentage x 0.20) + (Defensive Efficiency x 0.30) + (Opponent Effective Field Goal Percentage x 0.20) + (Average Scoring Margin x 0.15)
 
 
-## predictions made based on 2000 - 2024 (Transitional/Modern Era)
+## predictions made based on 2003 - 2024 (Transitional/Modern Era)

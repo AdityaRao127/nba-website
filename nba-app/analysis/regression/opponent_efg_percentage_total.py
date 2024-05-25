@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from sklearn import datasets, linear_model
 
-efg_path = '../data/efg_pct/'
+efg_path = '../data/opponent_efg_pct/'
 file_list = os.listdir(efg_path)
 
 efg_data_list = []
@@ -40,8 +40,8 @@ for i in range(len(dataframes)):
     num_datasets = len(df[df["Rank"]=="1"].columns)
     colors = ['blue'] * num_datasets
     plt.scatter(df["Team"], df["Statistic"])
-    plt.title(f'Effective Field Goal Percentage from {season1} - {season2}')
-    plt.xlabel('Effective Field Goal Percentage')
+    plt.title(f'Opponent Effective Field Goal Percentage from {season1} - {season2}')
+    plt.xlabel('Opponent Effective Field Goal Percentage')
     plt.xticks(rotation=45)
     plt.ylabel('Team')
     plt.show()
