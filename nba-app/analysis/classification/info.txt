@@ -4,3 +4,9 @@ Find similar teams and put into 3 clusters:
 - Championship Favorites
 - Playoff Contendors
 - Rebuilding / Poorly performing teams
+
+logic:
+- go through each 5 stat categories
+- a dataframe for each season. we sort by ascending value for team. 
+- add each statistic
+- return the total foe each season
