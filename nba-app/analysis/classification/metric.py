@@ -26,6 +26,8 @@ print("file path: " + file_path)
 path_list = os.listdir(path)
 print(path_list)
 count = 0
+all_data = []
+
 
 for season in range(2004, 2025):
     ending = f"_{season}"
@@ -41,8 +43,10 @@ for season in range(2004, 2025):
                 season = int(file.split('_')[-1].split('.')[0])
                 df['Year'] = season
                 df['Year'] = df['Year'].astype(int)
-                df = df.groupby(['Team', 'Statistic', 'Year']).sum()
+                df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
                 df = df.sort_values('Rank', ascending=True)
+                # filters
+                all_data.append(df)
                 print(f"Dataframe after grouping:\n{df}")
             if n < 4:
                 next_stat = statistic[n+1]
@@ -51,14 +55,29 @@ for season in range(2004, 2025):
                     next_file_path = next_folder_path + "/" + next_stat + ending + ".csv"
                     print(f"Next file path: {next_file_path}")
                     df = pd.read_csv(next_file_path)
+                    print(f"Dataframe after reading CSV:\n{df.head()}") 
                     season = int(file.split('_')[-1].split('.')[0])
                     df['Year'] = season
                     df['Year'] = df['Year'].astype(int)
-                    df = df.groupby(['Team', 'Statistic', 'Year']).sum()
+                    df['Statistic'] = stat
+                    df = df.groupby(['Team', 'Year', 'Statistic']).sum()
+                    df = df.sort_values('Rank', ascending=True)
 
                     print(f"Dataframe for next statistic:\n{df}")
+     
+# Concatenate
+all_data_df = pd.concat(all_data, ignore_index=True)
+print("Concatenated all data:\n", all_data_df.head())
 
+# Get sum for all stats based on team and year
+print("Data before final grouping and summing:\n", all_data_df.head())
+total_df = all_data_df.groupby(['Year', 'Team']).sum().reset_index()
+total_df["Statistic"] = total_df["Statistic"]/21
 
+print("Grouped and summed data:\n", total_df.head())
+
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    print("Total summed values for each team in each season:\n", total_df)
 
 
     
