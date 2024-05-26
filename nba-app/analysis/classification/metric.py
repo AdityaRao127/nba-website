@@ -6,7 +6,7 @@ from sklearn import datasets, linear_model
 
 dataframes = [None]*20
 for i in range(20):
-    dataframes[i] = pd.DataFrame() # Initialize an empty DataFrame
+    dataframes[i] = pd.DataFrame() # Initialize empty DataFrames
     
 path = '../data/'
 
@@ -38,9 +38,11 @@ for season in range(2004, 2025):
                 file_path = os.path.join(folder_path, file)
                 print(f"Reading file from path: {file_path}")
                 df = pd.read_csv(file_path)
-                #print(f"Dataframe before grouping:\n{df}")
-                df = df.groupby(['Team', 'Statistic']).sum()
-                
+                season = int(file.split('_')[-1].split('.')[0])
+                df['Year'] = season
+                df['Year'] = df['Year'].astype(int)
+                df = df.groupby(['Team', 'Statistic', 'Year']).sum()
+                df = df.sort_values('Rank', ascending=True)
                 print(f"Dataframe after grouping:\n{df}")
             if n < 4:
                 next_stat = statistic[n+1]
@@ -49,7 +51,11 @@ for season in range(2004, 2025):
                     next_file_path = next_folder_path + "/" + next_stat + ending + ".csv"
                     print(f"Next file path: {next_file_path}")
                     df = pd.read_csv(next_file_path)
-                    df = df.groupby(['Team', 'Statistic']).sum()
+                    season = int(file.split('_')[-1].split('.')[0])
+                    df['Year'] = season
+                    df['Year'] = df['Year'].astype(int)
+                    df = df.groupby(['Team', 'Statistic', 'Year']).sum()
+
                     print(f"Dataframe for next statistic:\n{df}")
 
 
