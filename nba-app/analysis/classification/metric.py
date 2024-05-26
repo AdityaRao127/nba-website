@@ -4,10 +4,6 @@ import pandas as pd
 import os
 from sklearn import datasets, linear_model
 
-dataframes = [None]*20
-for i in range(20):
-    dataframes[i] = pd.DataFrame() # Initialize empty DataFrames
-    
 path = '../data/'
 
 
@@ -29,17 +25,30 @@ count = 0
 all_data = []
 
 
-ending = f"_{season}"
 for n, stat in enumerate(statistic):
     print(f"Processing statistic: {stat}")
     folder_path = os.path.join(path, stat)
     if os.path.exists(folder_path):
         folder_list = os.listdir(folder_path)
         for file in folder_list:
+
             file_path = os.path.join(folder_path, file)
             print(f"Reading file from path: {file_path}")
             df = pd.read_csv(file_path)
             season = int(file.split('_')[-1].split('.')[0])
+            
+            # weighting the stats based on importance
+            if(stat == 'average_scoring_margin'):
+                df['Statistic'] = df['Statistic'] * 1.15
+            elif(stat == 'defensive_efficiency'):
+                df['Statistic'] = df['Statistic'] * 1.30
+            elif(stat == 'efg_pct'):
+                df['Statistic'] = df['Statistic'] * 1.20 
+            elif(stat == 'opponent_efg_pct'): # made negative, lower is better
+                df['Statistic'] = df['Statistic'] * -1.20
+            elif(stat == 'win_pct'):
+                df['Statistic'] = df['Statistic'] * 1.15
+            
             df['Year'] = season
             df['Year'] = df['Year'].astype(int)
             df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
