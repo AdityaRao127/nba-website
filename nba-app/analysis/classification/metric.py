@@ -80,9 +80,7 @@ print("Concatenated all data:\n", all_data_df.head())
 # Get sum for all stats based on team and year
 print("Data before final grouping and summing:\n", all_data_df.head())
 total_df = all_data_df.groupby(['Year', 'Team']).sum().reset_index()
-#total_df["Statistic"] = total_df["Statistic"]/21
-
-print("Grouped and summed data:\n", total_df.head())
+total_df = total_df.rename(columns={'Statistic': 'Success Score'})
 
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print("Total summed values for each team in each season:\n", total_df)
