@@ -47,12 +47,13 @@ for n, stat in enumerate(statistic):
             elif(stat == 'opponent_efg_pct'): # made negative, lower is better
                 df['Statistic'] = df['Statistic'] * -1.20
             elif(stat == 'win_pct'):
-                df['Statistic'] = df['Statistic'] * 1.15
+                df['Statistic'] = df['Statistic'] * 1.15 
             
             df['Year'] = season
             df['Year'] = df['Year'].astype(int)
             df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
-            df = df.sort_values('Rank', ascending=True)
+            df['Rank'] = df.groupby('Year')['Statistic'].rank(ascending=False)
+            #df = df.sort_values('Rank', ascending=True)
             # filters
             all_data.append(df)
             print(f"Dataframe after grouping:\n{df}")
@@ -69,18 +70,24 @@ for n, stat in enumerate(statistic):
                 df['Year'] = df['Year'].astype(int)
                 df['Statistic'] = stat
                 df = df.groupby(['Team', 'Year', 'Statistic']).sum()
-                df = df.sort_values('Rank', ascending=True)
+                #df['Rank'] = df.groupby('Year')['Statistic'].rank(ascending=False)
 
                 print(f"Dataframe for next statistic:\n{df}")
      
-# Concatenate
+# Concatenate 
 all_data_df = pd.concat(all_data, ignore_index=True)
 print("Concatenated all data:\n", all_data_df.head())
 
-# Get sum for all stats based on team and year
 print("Data before final grouping and summing:\n", all_data_df.head())
 total_df = all_data_df.groupby(['Year', 'Team']).sum().reset_index()
 total_df = total_df.rename(columns={'Statistic': 'Success Score'})
+
+# Rank
+total_df['Rank'] = total_df.groupby('Year')['Success Score'].rank(ascending=False, method='first')
+total_df['Rank'] = total_df['Rank'].astype(int)  # Convert rank to integer
+
+# Sort 
+total_df = total_df.sort_values(by=['Year', 'Rank'])
 
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print("Total summed values for each team in each season:\n", total_df)
