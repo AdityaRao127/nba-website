@@ -24,6 +24,14 @@ print(path_list)
 count = 0
 all_data = []
 
+# all stat metrics
+avg_scoring_margin_df = pd.DataFrame()
+defensive_efficiency_df = pd.DataFrame()
+efg_pct_df = pd.DataFrame()
+opponent_efg_pct_df = pd.DataFrame()
+win_pct_df = pd.DataFrame()
+
+
 
 for n, stat in enumerate(statistic):
     print(f"Processing statistic: {stat}")
@@ -31,12 +39,26 @@ for n, stat in enumerate(statistic):
     if os.path.exists(folder_path):
         folder_list = os.listdir(folder_path)
         for file in folder_list:
-
             file_path = os.path.join(folder_path, file)
             print(f"Reading file from path: {file_path}")
             df = pd.read_csv(file_path)
             season = int(file.split('_')[-1].split('.')[0])
             
+            df['Year'] = season
+            df['Year'] = df['Year'].astype(int)
+            unweighted_df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
+            
+            if stat == 'average_scoring_margin':
+                avg_scoring_margin_df = unweighted_df.drop(columns=['Rank'])
+            elif stat == 'defensive_efficiency':
+                defensive_efficiency_df = unweighted_df.drop(columns=['Rank'])
+            elif stat == 'efg_pct':
+                efg_pct_df = unweighted_df.drop(columns=['Rank'])
+            elif stat == 'opponent_efg_pct':
+                opponent_efg_pct_df = unweighted_df.drop(columns=['Rank'])
+            elif stat == 'win_pct':
+                win_pct_df = unweighted_df.drop(columns=['Rank'])
+                
             # weighting the stats based on importance
             if(stat == 'average_scoring_margin'):
                 df['Statistic'] = df['Statistic'] * 1.15
@@ -49,11 +71,12 @@ for n, stat in enumerate(statistic):
             elif(stat == 'win_pct'):
                 df['Statistic'] = df['Statistic'] * 1.15 
             
+            # rank indiviually within a season
             df['Year'] = season
             df['Year'] = df['Year'].astype(int)
             df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
             df['Rank'] = df.groupby('Year')['Statistic'].rank(ascending=False)
-            #df = df.sort_values('Rank', ascending=True)
+            
             # filters
             all_data.append(df)
             print(f"Dataframe after grouping:\n{df}")
@@ -73,7 +96,15 @@ for n, stat in enumerate(statistic):
                 #df['Rank'] = df.groupby('Year')['Statistic'].rank(ascending=False)
 
                 print(f"Dataframe for next statistic:\n{df}")
-     
+
+print("Indiviudal Metrics\n")
+avg_scoring_margin_df = avg_scoring_margin_df.rename(columns={'Statistic': 'Average Scoring Margin'})
+defensive_efficiency_df = defensive_efficiency_df.rename(columns={'Statistic': 'Defensive Efficiency'})
+efg_pct_df = efg_pct_df.rename(columns={'Statistic': 'Effective Field Goal Percentage'})
+opponent_efg_pct_df = opponent_efg_pct_df.rename(columns={'Statistic': 'Opponent Field Goal Percentage'})
+win_pct_df = win_pct_df.rename(columns={'Statistic': 'Win Percentage'})
+print(avg_scoring_margin_df.head())
+
 # Concatenate 
 all_data_df = pd.concat(all_data, ignore_index=True)
 print("Concatenated all data:\n", all_data_df.head())

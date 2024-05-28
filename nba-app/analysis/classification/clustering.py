@@ -10,8 +10,7 @@ import metric
 from metric import all_data, statistic
 
 
-
-
+# KMEANS CLUSTERING
 df = metric.total_df
 print(df)
 
