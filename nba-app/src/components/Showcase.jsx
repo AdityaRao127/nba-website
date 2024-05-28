@@ -8,9 +8,9 @@ const Showcase = () => {
   return (
     <div>
       <div className="showcase">
-        <Card image = {brainImage} text = 'Created a deep learning model using decision trees that was fed training data from web scraped nba statistics. I dont know what to say I am not gonna do this'/>
-        <Card image = {graphImage} text = 'Created a deep learning model using decision trees that was fed training data from web scraped nba statistics. I dont know what to say I am not gonna do this'/>
-        <Card image = {basketballImage} text = 'Created a deep learning model using decision trees that was fed training data from web scraped nba statistics. I dont know what to say I am not gonna do this'/>
+        <Card image = {brainImage} text = 'Best Odds to Win 2024 NBA Championship'/>
+        <Card image = {graphImage} text = 'Team Analysis'/>
+        <Card image = {basketballImage} text = 'Model Breakdown'/>
       </div>
     </div>
   )
