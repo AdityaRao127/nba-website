@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="header container">
       <div className='header'>
-        <h1 className='title'>NBA Prediction Project</h1>
+      <h1 className='title' style={{ marginLeft: '3px' }}>NBA Prediction Project</h1>
         <nav>
           <ul className='navbar'>
             <li style={{ marginLeft: '15px' }}><a href='#'>Home</a></li>
