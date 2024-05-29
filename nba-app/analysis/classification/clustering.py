@@ -22,8 +22,9 @@ merged_df = pd.merge(merged_df, defensive_efficiency_df, on=['Team', 'Year'], su
 merged_df = pd.merge(merged_df, win_pct_df, on=['Team', 'Year'], suffixes=('', '_win_pct'))
 merged_df = pd.merge(merged_df, avg_scoring_margin_df, on=['Team', 'Year'], suffixes=('', '_avg_scoring_margin'))
 #test the merge
-print(merged_df.head())
-print(opponent_efg_pct_df.head())
+#print("All years:")
+#print(merged_df['Year'].unique())
+#print(opponent_efg_pct_df.head())
 
 
 # Stats overview, correlation coefficients
@@ -33,14 +34,14 @@ y_label =  "Win Percentage"
 x_label = ["Effective Field Goal Percentage", "Opponent Effective Field Goal Percentage", "Defensive Efficiency", "Average Scoring Margin"]
 n = 0
 
-for season in range(2004, 2024):
+for season in range(2004, 2025):
     for stat in x_label:
         season_df = merged_df[merged_df['Year'] == season]
         print("test2")
         print(season_df.head())
         sns.scatterplot(x=stat, y=y_label, data=season_df, hue='Team')
         plt.title((stat) + "vs. " + (y_label) + str(season) + " - " + str(season+1))
-        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.legend(bbox_to_anchor=(1.015, 1), loc='upper left')
 
         # correlation coefficient https://stackoverflow.com/questions/70759369/adding-correlation-coefficient-to-a-seaborn-scatter-plot
         r, p = sp.stats.pearsonr(x=season_df[stat], y=season_df[y_label])
@@ -52,9 +53,15 @@ for season in range(2004, 2024):
         X_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 100)
         plt.plot(X_plot, m*X_plot + b, '-')
         
-        
-        plt.show() ## since steph curry era, it was relevenat. now it's not
-    n+=1 
+        # Save the figure to a file
+        folder_path = f'../../src/images/{season}'
+        absolute_folder_path = os.path.abspath(folder_path)
+        print(f'Saving images in: {absolute_folder_path}')
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path, exist_ok=True)
+        plt.savefig(f'{folder_path}/{stat}_vs_{y_label}.png')
+        #plt.show() 
+        plt.clf()
     
 '''
     # other plot with trendline
