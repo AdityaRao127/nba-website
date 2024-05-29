@@ -30,7 +30,7 @@ defensive_efficiency_df = pd.DataFrame()
 efg_pct_df = pd.DataFrame()
 opponent_efg_pct_df = pd.DataFrame()
 win_pct_df = pd.DataFrame()
-
+unweighted_df = pd.DataFrame()
 
 
 for n, stat in enumerate(statistic):
@@ -47,17 +47,18 @@ for n, stat in enumerate(statistic):
             df['Year'] = season
             df['Year'] = df['Year'].astype(int)
             unweighted_df = df.groupby(['Team', 'Year', 'Statistic']).sum().reset_index()
+ 
             
             if stat == 'average_scoring_margin':
-                avg_scoring_margin_df = unweighted_df.drop(columns=['Rank'])
+                avg_scoring_margin_df = pd.concat([avg_scoring_margin_df, unweighted_df], ignore_index=True)
             elif stat == 'defensive_efficiency':
-                defensive_efficiency_df = unweighted_df.drop(columns=['Rank'])
+                defensive_efficiency_df = pd.concat([defensive_efficiency_df, unweighted_df], ignore_index=True)
             elif stat == 'efg_pct':
-                efg_pct_df = unweighted_df.drop(columns=['Rank'])
+                efg_pct_df = pd.concat([efg_pct_df, unweighted_df], ignore_index=True)
             elif stat == 'opponent_efg_pct':
-                opponent_efg_pct_df = unweighted_df.drop(columns=['Rank'])
+                opponent_efg_pct_df = pd.concat([opponent_efg_pct_df, unweighted_df], ignore_index=True)
             elif stat == 'win_pct':
-                win_pct_df = unweighted_df.drop(columns=['Rank'])
+                win_pct_df = pd.concat([win_pct_df, unweighted_df], ignore_index=True)
                 
             # weighting the stats based on importance
             if(stat == 'average_scoring_margin'):
@@ -98,13 +99,17 @@ for n, stat in enumerate(statistic):
                 print(f"Dataframe for next statistic:\n{df}")
 
 print("Indiviudal Metrics\n")
+
+## years are not right here. fix this then run the code in clustering.py file
 avg_scoring_margin_df = avg_scoring_margin_df.rename(columns={'Statistic': 'Average Scoring Margin'})
 defensive_efficiency_df = defensive_efficiency_df.rename(columns={'Statistic': 'Defensive Efficiency'})
 efg_pct_df = efg_pct_df.rename(columns={'Statistic': 'Effective Field Goal Percentage'})
-opponent_efg_pct_df = opponent_efg_pct_df.rename(columns={'Statistic': 'Opponent Field Goal Percentage'})
+opponent_efg_pct_df = opponent_efg_pct_df.rename(columns={'Statistic': 'Opponent Effective Field Goal Percentage'})
 win_pct_df = win_pct_df.rename(columns={'Statistic': 'Win Percentage'})
-print(avg_scoring_margin_df.head())
-
+#print(avg_scoring_margin_df.head())
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    print("Total summed values for each team in each season2:\n", avg_scoring_margin_df)
+'''
 # Concatenate 
 all_data_df = pd.concat(all_data, ignore_index=True)
 print("Concatenated all data:\n", all_data_df.head())
@@ -125,4 +130,4 @@ with pd.option_context('display.max_rows', None, 'display.max_columns', None):
 
 
  # save to public folder   
-    
+    '''
