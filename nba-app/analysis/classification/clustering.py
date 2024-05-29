@@ -47,7 +47,7 @@ for season in range(2004, 2025):
         # correlation coefficient https://stackoverflow.com/questions/70759369/adding-correlation-coefficient-to-a-seaborn-scatter-plot
         r, p = sp.stats.pearsonr(x=season_df[stat], y=season_df[y_label])
         ax= plt.gca()
-        plt.text(.05, .95, "Person's r {:.2f}".format(r), transform=ax.transAxes, weight='bold', color='red', fontsize=14)
+        plt.text(.05, .95, "Pearson's r {:.2f}".format(r), transform=ax.transAxes, weight='bold', color='red', fontsize=14)
 
         # correlation line
         m, b = np.polyfit(season_df[stat], season_df[y_label], 1)
