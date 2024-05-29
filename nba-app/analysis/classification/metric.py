@@ -109,7 +109,7 @@ win_pct_df = win_pct_df.rename(columns={'Statistic': 'Win Percentage'})
 #print(avg_scoring_margin_df.head())
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print("Total summed values for each team in each season2:\n", avg_scoring_margin_df)
-'''
+
 # Concatenate 
 all_data_df = pd.concat(all_data, ignore_index=True)
 print("Concatenated all data:\n", all_data_df.head())
@@ -127,7 +127,5 @@ total_df = total_df.sort_values(by=['Year', 'Rank'])
 
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print("Total summed values for each team in each season:\n", total_df)
-
-
- # save to public folder   
-    '''
+ 
+    
