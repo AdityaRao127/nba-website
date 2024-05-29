@@ -1,0 +1,66 @@
+.analysis-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.season-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.season-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.season-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.season-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.image-container {
+  width: 100%;
+}
+
+.season-images{
+  width:600px;
+  margin-left:279px;
+}
+.season-images img{
+  width: 100%;
+  height: auto;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  transition: transform 0.2s;
+  margin-right: 790px;
+}
+
+.season-image:hover {
+  transform: scale(1.05);
+}
+
+.markdown-section {
+  text-align: left;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
