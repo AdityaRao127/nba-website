@@ -25,7 +25,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt 
 from sklearn import preprocessing, svm 
 from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LinearRegression 
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.metrics import accuracy_score
 
 
 merged_df = total_df
@@ -103,16 +104,18 @@ y = training_set['Won Championship']
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.75, random_state=42)
 
 
-lr_model = LinearRegression()
+lr_model = LogisticRegression()
 lr_model.fit(X_train, y_train)
 
 # Evaluateion
 y_pred = lr_model.predict(X_val)
 print("Validation Score:", lr_model.score(X_val, y_val))
 
-
+# accuracy
 predictions = lr_model.predict(testing_set[['Success Score']])
+accuracy = accuracy_score(y_val, y_pred)
 testing_set['Predicted Win'] = predictions
+print("Accuracy:", accuracy)
 
 # Find the team with the highest predicted win
 predicted_winner = testing_set.loc[testing_set['Predicted Win'].idxmax()]['Team']
@@ -120,6 +123,7 @@ sorted_teams = testing_set.sort_values(by='Predicted Win', ascending=False)
 
 
 print(sorted_teams[['Team', 'Predicted Win', 'Year']])
+print(sorted_teams.iloc[0]['Team'] + " is predicted to win.")
 
 
 plt.scatter(X_train, y_train, color='blue', label='Training data')
@@ -132,3 +136,6 @@ plt.xlabel('Success Score')
 plt.ylabel('Won Championship')
 plt.legend()
 plt.show()
+
+# from here we can see that logisitc regression is a much better option
+
