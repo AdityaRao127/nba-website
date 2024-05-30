@@ -118,14 +118,14 @@ testing_set['Predicted Win'] = predictions
 predicted_winner = testing_set.loc[testing_set['Predicted Win'].idxmax()]['Team']
 sorted_teams = testing_set.sort_values(by='Predicted Win', ascending=False)
 
-# Print the 'Team' and 'Predicted Win' columns
+
 print(sorted_teams[['Team', 'Predicted Win', 'Year']])
 
-# Plot the training data
+
 plt.scatter(X_train, y_train, color='blue', label='Training data')
-# Plot the validation data
+
 plt.scatter(X_val, y_val, color='red', label='Validation data')
-# Plot the regression line
+
 plt.plot(X_val, y_pred, color='black', label='Regression line')
 
 plt.xlabel('Success Score')
