@@ -47,36 +47,27 @@ df_combined['Won Championship'] = 0
 print(df_combined.head())
 
 nba_teams = [
-    "San Antonio",
-    "Detroit",
-    "Dallas",
-    "Phoenix",
-    "Miami",
-    "Memphis",
-    "LA Clippers",
-    "LA Lakers",
-    "Washington",
-    "Indiana",
-    "Cleveland",
-    "Brooklyn",
-    "Sacramento",
-    "Chicago",
-    "Denver",
-    "Orlando",
-    "Golden State",
-    "Milwaukee",
-    "Boston",
-    "Houston",
-    "Minnesota",
-    "Philadelphia",
-    "Utah",
-    "New Orleans",
-    "Toronto",
-    "Okla City",
-    "Charlotte",
-    "Atlanta",
-    "New York",
-    "Portland"
+    "San Antonio", # 2004
+    "Detroit", # 2005
+    "Miami",   # 2006
+    "San Antonio",  # 2007
+    "Boston", # 2008
+    "LA Lakers", # 2009
+    "LA Lakers", # 2010
+    "Dallas",   # 2011
+    "Miami",    # 2012
+    "Miami",    # 2013
+    "San Antonio", # 2014
+    "Golden State",     # 2015
+    "Cleveland",   # 2016
+    "Golden State", # 2017
+    "Golden State", # 2018
+    "Toronto", # 2019
+    "LA Lakers", # 2020
+    "Milwaukee", # 2021
+    "Golden State", # 2022
+    "Denver",   # 2023
+    "Unknown" #2024
 ]
 
 for season in range(2004, 2025):
@@ -89,6 +80,9 @@ for season in range(2004, 2025):
 
 print("test1")
 print(df_combined.head())
+# Save the combined DataFrame to a CSV file
+df_combined.to_csv('dataframe_combined.csv', index=False)
+
 df_combined = df_combined.sort_values(by=['Year', 'Won Championship', 'Team'], ascending=[True, False, True])
 
 #with pd.option_context('display.max_rows', None, 'display.max_columns', None):  
@@ -104,7 +98,7 @@ testing_set = df_combined.loc[df_combined['Year'] == 2024].copy()
 X = training_set[['Success Score']]
 y = training_set['Won Championship']
 
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.25)
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.20, random_state=42)
 
 
 lr_model = LogisticRegression()
@@ -134,27 +128,35 @@ predictions = lr_model.predict(testing_set[['Success Score']])
 accuracy = round(accuracy_score(y_val, y_pred) * 100, 3)
 testing_set['Predicted Win'] = predictions
 print("Accuracy:", accuracy, "%")
-win_predicted = (testing_set.iloc[0])
-win_predicted_accuracy = win_predicted['Win Probability'] 
-print(win_predicted['Team'], "has a predicted probability of winning the 2024 NBA Championship of", win_predicted_accuracy, "%")
+win_predicted = sorted_teams[['Team', 'Win Probability', 'Success Score']].head(1)
+win_predicted_accuracy = win_predicted['Win Probability'].values[0]
+team_name = win_predicted['Team'].values[0] 
+print(team_name, "has a predicted probability of winning the 2024 NBA Championship of", win_predicted_accuracy, "%")
 
 
 
 
 
 # Scatter plot 
-plt.scatter(testing_set['Success Score'], testing_set['Won Championship'], color='blue', label='Testing data')
-
-
-plt.scatter(X_val, y_val, color='red', label='Validation data')
+#plt.scatter(X, y, color='blue', label='Testing data')
+#plt.scatter(X_val, y_val, color='red', label='Validation data')
 
 # Logistic regression model fit 
 # https://www.statology.org/plot-logistic-regression-in-python/
-sns.regplot(x=testing_set['Success Score'], y=testing_set['Won Championship'], logistic=True, color='green', label='Logistic regression model')
-
-plt.yticks([0, 1], ['No', 'Yes'])
-
+sns.regplot(x=training_set['Success Score'], y=training_set['Won Championship'], logistic=True,color='blue', label='Data Points', ci=None, scatter_kws={'color': 'green'}, line_kws={'color': 'red'})
+plt.yticks([0, 1])
 plt.title("Logistic Regression Model for Success Score vs. Winning Championship")
 plt.legend()
 plt.show()
+plt.savefig('../../src/images/logistic_regression_model_visualization.png')
+plt.clf()
 
+import onnx
+from skl2onnx import convert_sklearn
+from skl2onnx.common.data_types import FloatTensorType
+
+# ONNX
+initial_type = [('float_input', FloatTensorType([None, 1]))]
+onnx_model = convert_sklearn(lr_model, initial_types=initial_type)
+with open("logistic_regression_model.onnx", "wb") as f:
+    f.write(onnx_model.SerializeToString())
