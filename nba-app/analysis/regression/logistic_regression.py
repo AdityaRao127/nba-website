@@ -27,6 +27,9 @@ from sklearn import preprocessing, svm
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import accuracy_score
+from scipy.special import expit
+from scipy.stats import linregress
+import seaborn as sns
 
 
 merged_df = total_df
@@ -101,7 +104,7 @@ testing_set = df_combined.loc[df_combined['Year'] == 2024].copy()
 X = training_set[['Success Score']]
 y = training_set['Won Championship']
 
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.75, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.25)
 
 
 lr_model = LogisticRegression()
@@ -111,31 +114,45 @@ lr_model.fit(X_train, y_train)
 y_pred = lr_model.predict(X_val)
 print("Validation Score:", lr_model.score(X_val, y_val))
 
+# Probability of eaach time winning
+probabilities = lr_model.predict_proba(testing_set[['Success Score']])
+
+win_probabilities = probabilities[:, 1]
+
+testing_set['Win Probability'] = win_probabilities * 100
+
+sorted_teams = testing_set.sort_values(by='Win Probability', ascending=False)
+sorted_teams['Success Score'] = testing_set['Success Score']
+
+all_teams_score = sorted_teams[['Team', 'Success Score', 'Win Probability']]
+
+# Print the top 5 teams with the highest chance of winning
+print(sorted_teams[['Team', 'Win Probability', 'Success Score']].head(10))
+
 # accuracy
 predictions = lr_model.predict(testing_set[['Success Score']])
-accuracy = accuracy_score(y_val, y_pred)
+accuracy = round(accuracy_score(y_val, y_pred) * 100, 3)
 testing_set['Predicted Win'] = predictions
-print("Accuracy:", accuracy)
-
-# Find the team with the highest predicted win
-predicted_winner = testing_set.loc[testing_set['Predicted Win'].idxmax()]['Team']
-sorted_teams = testing_set.sort_values(by='Predicted Win', ascending=False)
-
-
-print(sorted_teams[['Team', 'Predicted Win', 'Year']])
-print(sorted_teams.iloc[0]['Team'] + " is predicted to win.")
+print("Accuracy:", accuracy, "%")
+win_predicted = (testing_set.iloc[0])
+win_predicted_accuracy = win_predicted['Win Probability'] 
+print(win_predicted['Team'], "has a predicted probability of winning the 2024 NBA Championship of", win_predicted_accuracy, "%")
 
 
-plt.scatter(X_train, y_train, color='blue', label='Training data')
+
+
+
+# Scatter plot 
+plt.scatter(testing_set['Success Score'], testing_set['Won Championship'], color='blue', label='Testing data')
+
 
 plt.scatter(X_val, y_val, color='red', label='Validation data')
 
-plt.plot(X_val, y_pred, color='black', label='Regression line')
+# Logistic regression model fit
+sns.regplot(x=testing_set['Success Score'], y=testing_set['Won Championship'], logistic=True, color='green', label='Logistic regression model')
 
-plt.xlabel('Success Score')
-plt.ylabel('Won Championship')
+plt.yticks([0, 1], ['No', 'Yes'])
+
+plt.title("Logistic Regression Model for Success Score vs. Winning Championship")
 plt.legend()
 plt.show()
-
-# from here we can see that logisitc regression is a much better option
-
