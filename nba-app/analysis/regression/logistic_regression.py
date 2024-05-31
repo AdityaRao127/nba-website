@@ -147,7 +147,7 @@ sns.regplot(x=training_set['Success Score'], y=training_set['Won Championship'],
 plt.yticks([0, 1])
 plt.title("Logistic Regression Model for Success Score vs. Winning Championship")
 plt.legend()
-plt.show()
+#plt.show()
 plt.savefig('../../src/images/logistic_regression_model_visualization.png')
 plt.clf()
 
