@@ -8,13 +8,13 @@ import img2004_2 from '../images/2004/Defensive_Efficiency_vs_Win_Percentage.png
 import img2004_3 from '../images/2004/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2004_4 from '../images/2004/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 
-// Import images for 2005 season
+
 import img2005_1 from '../images/2005/Average_Scoring_Margin_vs_Win_Percentage.png';
 import img2005_2 from '../images/2005/Defensive_Efficiency_vs_Win_Percentage.png';
 import img2005_3 from '../images/2005/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2005_4 from '../images/2005/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 
-// Import images for other seasons similarly...
+
 import img2006_1 from '../images/2006/Average_Scoring_Margin_vs_Win_Percentage.png';
 import img2006_2 from '../images/2006/Defensive_Efficiency_vs_Win_Percentage.png';
 import img2006_3 from '../images/2006/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
@@ -150,7 +150,11 @@ const markdownBySeason = {
   2012: 'Markdown content for 2012 season',
   2013: 'Markdown content for 2013 season',
   2014: 'Markdown content for 2014 season',
-  2015: 'Markdown content for 2015 season',
+  2015: `**2015 Statitical Trends:** 
+  * Peterson's Coefficient: Closer to 1 = statistically significant. Closer to 0 = not significant.
+    * Defensive Efficiency was somewhat related to win percentage. Overall, better defensive teams had a higher win percentage.
+    * Stephen Curry Effect: EFG went up and better shooting teams started to win championships. Clusters do not fit as well here.
+  `,
   2016: 'Markdown content for 2016 season',
   2017: 'Markdown content for 2017 season',
   2018: 'Markdown content for 2018 season',

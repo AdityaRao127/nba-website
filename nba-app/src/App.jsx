@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/Header.jsx';
 import Showcase from './components/Showcase.jsx'
+import Prediction from './components/Prediction.jsx';
+import analysis from './components/analysis.jsx'
 
 function App() {
   return (

@@ -12,15 +12,25 @@ const Showcase = () => {
     navigate('/analysis');
   };
 
+  const handlePredictionClick = () => {
+    navigate('/predictions')
+  };
+
+  const handleBreakdownClick = () => {
+    navigate('/model-breakdown');
+  };
+
   return (
     <div>
       <div className="showcase">
-        <Card image={brainImage} text='Best Odds to Win 2024 NBA Championship' />
+        <Card image={brainImage} text='Best Odds to Win 2024 NBA Championship' onClick={handlePredictionClick} />
         <Card image={graphImage} text='Team Analysis' onClick={handleTeamAnalysisClick} />
-        <Card image={basketballImage} text='Model Breakdown' />
+        <Card image={basketballImage} text='Model Breakdown' onCLick={handleBreakdownClick} />
       </div>
     </div>
   );
 };
 
 export default Showcase;
+
+

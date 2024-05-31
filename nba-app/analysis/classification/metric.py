@@ -100,7 +100,6 @@ for n, stat in enumerate(statistic):
 
 print("Indiviudal Metrics\n")
 
-## years are not right here. fix this then run the code in clustering.py file
 avg_scoring_margin_df = avg_scoring_margin_df.rename(columns={'Statistic': 'Average Scoring Margin'})
 defensive_efficiency_df = defensive_efficiency_df.rename(columns={'Statistic': 'Defensive Efficiency'})
 efg_pct_df = efg_pct_df.rename(columns={'Statistic': 'Effective Field Goal Percentage'})
