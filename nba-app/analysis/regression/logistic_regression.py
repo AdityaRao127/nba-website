@@ -148,7 +148,8 @@ plt.scatter(testing_set['Success Score'], testing_set['Won Championship'], color
 
 plt.scatter(X_val, y_val, color='red', label='Validation data')
 
-# Logistic regression model fit
+# Logistic regression model fit 
+# https://www.statology.org/plot-logistic-regression-in-python/
 sns.regplot(x=testing_set['Success Score'], y=testing_set['Won Championship'], logistic=True, color='green', label='Logistic regression model')
 
 plt.yticks([0, 1], ['No', 'Yes'])
@@ -156,3 +157,4 @@ plt.yticks([0, 1], ['No', 'Yes'])
 plt.title("Logistic Regression Model for Success Score vs. Winning Championship")
 plt.legend()
 plt.show()
+
