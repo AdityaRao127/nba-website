@@ -43,10 +43,10 @@ function Prediction() {
         'Houston Rockets': 'Houston',
         'Portland Trail Blazers': 'Portland',
     };
-
+// change
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch(apiUrl, { // test
+        const response = await fetch(apiUrl, { // test test
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
