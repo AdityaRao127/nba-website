@@ -46,7 +46,7 @@ function Prediction() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch(apiUrl, {
+        const response = await fetch(apiUrl, { // test
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
