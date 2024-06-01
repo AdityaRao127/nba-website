@@ -5,27 +5,14 @@ import pandas as pd
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+import subprocess
 
 load_dotenv()
 port = os.getenv('APP_PORT')
+
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
-
-# Load the combined DataFrame
-df_combined = pd.read_csv('dataframe_combined.csv')
-
-
-
-def get_success_score(team):
-    latest_season = 2024
-    team_data = df_combined[(df_combined['Team'] == team) & (df_combined['Year'] == latest_season)]
-    
-    if team_data.empty:
-        return None
-    
-    success_score = team_data['Success Score'].values[0]
-    return success_score
 
 @app.route('/')
 def home():
@@ -33,13 +20,18 @@ def home():
 
 @app.route('/predictions', methods=['POST'])
 def predict():
+
+    subprocess.run(['python', 'logistic_regression.py'], check=True)
+    
+    df_combined = pd.read_csv('dataframe_combined.csv')
+
     data = request.get_json()
     team = data.get("team")
     
-    # Load ONNX model
+    # Load ONNX 
     session = rt.InferenceSession("logistic_regression_model.onnx")
 
-    # sucess score
+
     latest_season = 2024
     team_data = df_combined[(df_combined['Team'] == team) & (df_combined['Year'] == latest_season)]
     
@@ -58,5 +50,4 @@ def predict():
     return jsonify({'team': team, 'win_probability': f"{win_probability:.3f}%"})
 
 if __name__ == '__main__':
-    import os
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', port)))
