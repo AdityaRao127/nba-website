@@ -40,11 +40,11 @@ merged_df = pd.merge(merged_df, avg_scoring_margin_df, on=['Team', 'Year'], suff
 merged_df = pd.merge(merged_df, win_pct_df, on=['Team', 'Year'], suffixes=('', '_win_percentage'))
 
 df_combined = merged_df
-print(df_combined)
+#print(df_combined)
 
 won_champ = 0
 df_combined['Won Championship'] = 0
-print(df_combined.head())
+#print(df_combined.head())
 
 nba_teams = [
     "San Antonio", # 2004
