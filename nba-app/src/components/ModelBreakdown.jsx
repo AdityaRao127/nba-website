@@ -11,7 +11,8 @@ import clusteringImage2 from '../images/defensive_efficiency_avg_scoring_margin.
 import katex from 'katex';
 import 'katex/dist/katex.min.css'; 
 import './ModelBreakdown.css'; 
-
+// example change
+// make a change
 const equation = `(Reg. Season Win\\% \\times 0.15) + (Effective Field Goal Percentage \\times 0.20) + (Defensive Efficiency \\times -0.30) + (Opponent Effective Field Goal Percentage \\times -0.20) + (Average Scoring Margin \\times 0.15)`;
 const equationInHTML = katex.renderToString(equation);
 
