@@ -32,13 +32,17 @@ merged_df = pd.merge(merged_df, win_pct_df, on=['Team', 'Year'], suffixes=('', '
 
 statistics = ["Effective Field Goal Percentage", "Opponent Effective Field Goal Percentage", "Defensive Efficiency", "Average Scoring Margin"]
 
+n = 0
 for i in range(len(statistics)):
     for j in range(i+1, len(statistics)):
-        x_label = "Defensive Efficiency"
-        y_label = "Average Scoring Margin"
+        x_label = statistics[i]
+        y_label = statistics[j]
         sns.scatterplot(x=x_label, y=y_label, data=merged_df, hue='Win Percentage')
+        plt.savefig(f"../../src/images/initial_analysis_{n+1}.png") # Added .png extension to the saved image file
+        plt.show()
         plt.clf()
-        #plt.show()
+        n += 1
+
     
 
 ## KMEANS CLUSTERING
@@ -64,6 +68,7 @@ cluster_df = pd.DataFrame(np.hstack((X, clusters.reshape(-1, 1))), columns=[x, y
 
 sns.scatterplot(x=x, y=y, data=cluster_df, hue="Win Percentage")
 plt.plot()
+plt.savefig("../../src/images/defensive_efficiency_avg_scoring_margin.jpg")
 plt.show()
 plt.clf()
 
@@ -72,8 +77,8 @@ plt.clf()
 merged_df['Cluster'] = clusters
 
 rebuilding_teams = merged_df.loc[merged_df['Cluster'] == 2, ['Team', 'Year']]
-playoff_contendors = merged_df.loc[merged_df['Cluster'] == 0, ['Team', 'Year']]
-champ_contendors = merged_df.loc[merged_df['Cluster'] == 1, ['Team', 'Year']]
+playoff_contendors = merged_df.loc[merged_df['Cluster'] == 1, ['Team', 'Year']]
+champ_contendors = merged_df.loc[merged_df['Cluster'] == 0, ['Team', 'Year']]
 
 #metric_clusters_merged = pd.concat([rebuilding_teams, playoff_contendors, champ_contendors], ignore_index=True)
 
@@ -86,21 +91,22 @@ print("Champ contendors: ", champ_contendors)
 
 print("Defensive Efficiency and Average Scoring Margin Results")
 ## All championship contenders based on defensive efficiency and average scoring margin. The hue represents the win percentage.
-for season in range(2004, 2025):
-    print(f"{season} Season")
-    rebuilding_teams_season = rebuilding_teams.loc[rebuilding_teams['Year'] == season, 'Team']
-    for team in rebuilding_teams_season:
-        print(f"{team} in {season} - Play-in contendors")
-    
-    playoff_contendors_season = playoff_contendors.loc[playoff_contendors['Year'] == season, 'Team']
-    for team in playoff_contendors_season:
-        print(f"{team} in {season} - Playoff contender")
+with open('dfgvsasc.txt', 'w') as f:
+    for season in range(2004, 2025):
+        f.write(f"{season} Season\n")
+        rebuilding_teams_season = rebuilding_teams.loc[rebuilding_teams['Year'] == season, 'Team']
+        for team in rebuilding_teams_season:
+            f.write(f"{team} in {season} - Play-in contendors\n")
         
-    champ_contendors_season = champ_contendors.loc[champ_contendors['Year'] == season, 'Team']
-    for team in champ_contendors_season:
-        print(f"{team} in {season} - Championship contender")
-        
-    print("\n")
+        playoff_contendors_season = playoff_contendors.loc[playoff_contendors['Year'] == season, 'Team']
+        for team in playoff_contendors_season:
+            f.write(f"{team} in {season} - Playoff contender\n")
+            
+        champ_contendors_season = champ_contendors.loc[champ_contendors['Year'] == season, 'Team']
+        for team in champ_contendors_season:
+            f.write(f"{team} in {season} - Championship contender\n")
+            
+        f.write("\n")
     
 ##
 ##
@@ -127,6 +133,7 @@ cluster_df = pd.DataFrame(np.hstack((X, clusters.reshape(-1, 1))), columns=[x, y
 sns.scatterplot(x=x, y=y, data=cluster_df, hue="Win Percentage")
 plt.gca().invert_yaxis()
 plt.plot()
+plt.savefig("../../src/images/efg_oefg.jpg")
 plt.show()
 plt.clf()
 
@@ -134,8 +141,8 @@ plt.clf()
 ## find teams from each cluster
 merged_df['Cluster'] = clusters
 
-rebuilding_teams = merged_df.loc[merged_df['Cluster'] == 1, ['Team', 'Year']]
-playoff_contendors = merged_df.loc[merged_df['Cluster'] == 0, ['Team', 'Year']]
+rebuilding_teams = merged_df.loc[merged_df['Cluster'] == 0, ['Team', 'Year']]
+playoff_contendors = merged_df.loc[merged_df['Cluster'] == 1, ['Team', 'Year']]
 champ_contendors = merged_df.loc[merged_df['Cluster'] == 2, ['Team', 'Year']]
 
 #metric_clusters_merged = pd.concat([rebuilding_teams, playoff_contendors, champ_contendors], ignore_index=True)
@@ -149,18 +156,19 @@ print("Champ contendors: ", champ_contendors)
 
 print("Defensive Efficiency and Average Scoring Margin Results")
 ## All championship contenders based on defensive efficiency and average scoring margin. The hue represents the win percentage.
-for season in range(2004, 2025):
-    print(f"{season} Season")
-    rebuilding_teams_season = rebuilding_teams.loc[rebuilding_teams['Year'] == season, 'Team']
-    for team in rebuilding_teams_season:
-        print(f"{team} in {season} - Play-in contendors")
-    
-    playoff_contendors_season = playoff_contendors.loc[playoff_contendors['Year'] == season, 'Team']
-    for team in playoff_contendors_season:
-        print(f"{team} in {season} - Playoff contender")
+with open('efgvsoefg.txt', 'w') as f:
+    for season in range(2004, 2025):
+        f.write(f"{season} Season\n")
+        rebuilding_teams_season = rebuilding_teams.loc[rebuilding_teams['Year'] == season, 'Team']
+        for team in rebuilding_teams_season:
+            f.write(f"{team} in {season} - Play-in contendors\n")
         
-    champ_contendors_season = champ_contendors.loc[champ_contendors['Year'] == season, 'Team']
-    for team in champ_contendors_season:
-        print(f"{team} in {season} - Championship contender")
-        
-    print("\n")
+        playoff_contendors_season = playoff_contendors.loc[playoff_contendors['Year'] == season, 'Team']
+        for team in playoff_contendors_season:
+            f.write(f"{team} in {season} - Playoff contender\n")
+            
+        champ_contendors_season = champ_contendors.loc[champ_contendors['Year'] == season, 'Team']
+        for team in champ_contendors_season:
+            f.write(f"{team} in {season} - Championship contender\n")
+            
+        f.write("\n")

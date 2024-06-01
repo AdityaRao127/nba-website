@@ -3,7 +3,11 @@ import onnxruntime as rt
 import numpy as np
 import pandas as pd
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+port = os.getenv('VITE_APP_PORT')
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)

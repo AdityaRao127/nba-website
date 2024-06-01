@@ -64,7 +64,7 @@ for n, stat in enumerate(statistic):
             if(stat == 'average_scoring_margin'):
                 df['Statistic'] = df['Statistic'] * 1.15
             elif(stat == 'defensive_efficiency'):
-                df['Statistic'] = df['Statistic'] * 1.30
+                df['Statistic'] = df['Statistic'] * -1.30
             elif(stat == 'efg_pct'):
                 df['Statistic'] = df['Statistic'] * 1.20 
             elif(stat == 'opponent_efg_pct'): # made negative, lower is better

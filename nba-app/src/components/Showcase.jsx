@@ -17,7 +17,7 @@ const Showcase = () => {
   };
 
   const handleBreakdownClick = () => {
-    navigate('/model-breakdown');
+    navigate('/model-breakdown')
   };
 
   return (
@@ -25,7 +25,7 @@ const Showcase = () => {
       <div className="showcase">
         <Card image={brainImage} text='Best Odds to Win 2024 NBA Championship' onClick={handlePredictionClick} />
         <Card image={graphImage} text='Team Analysis' onClick={handleTeamAnalysisClick} />
-        <Card image={basketballImage} text='Model Breakdown' onCLick={handleBreakdownClick} />
+        <Card image={basketballImage} text='Model Breakdown' onClick={handleBreakdownClick} />
       </div>
     </div>
   );

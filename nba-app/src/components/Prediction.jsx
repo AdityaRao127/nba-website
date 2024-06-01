@@ -4,6 +4,8 @@ import larry_trophy from '../images/larry_trophy.jpg';
 import playoff_logo from '../images/playoff_logo.jpg';
 import playin_logo from '../images/playin_logo.jpg';
 import './Prediction.css'; // Import the CSS file
+const apiUrl = import.meta.env.VITE_API_URL
+
 
 function Prediction() {
     const [team, setTeam] = useState('');
@@ -44,15 +46,20 @@ function Prediction() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch(process.env.REACT_API_URL, {
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ team }),
         });
-        const data = await response.json();
-        setPrediction(data);
+    
+        if (response.ok) {
+            const data = await response.json();
+            setPrediction(data);
+        } else {
+            console.error('Response:', response);
+        }
     };
 
     return (
@@ -112,6 +119,7 @@ function Prediction() {
                     )}
                 </div>
             )}
+            
         </div>
     );
 }
