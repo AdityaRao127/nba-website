@@ -3,7 +3,7 @@ import nba_draft from '../images/nba_draft.jpg';
 import larry_trophy from '../images/larry_trophy.jpg';
 import playoff_logo from '../images/playoff_logo.jpg';
 import playin_logo from '../images/playin_logo.jpg';
-import './Prediction.css'; // Import the CSS file
+import './Prediction.css'; 
 const apiUrl = import.meta.env.VITE_API_URL
 
 

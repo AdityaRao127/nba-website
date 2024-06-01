@@ -9,8 +9,8 @@ import kmeansImage6 from '../images/initial_analysis_6.png';
 import clusteringImage1 from '../images/efg_oefg.jpg';
 import clusteringImage2 from '../images/defensive_efficiency_avg_scoring_margin.jpg';
 import katex from 'katex';
-import 'katex/dist/katex.min.css'; // Import Katex CSS
-import './ModelBreakdown.css'; // Import custom CSS
+import 'katex/dist/katex.min.css'; 
+import './ModelBreakdown.css'; 
 
 const equation = `(Reg. Season Win\\% \\times 0.15) + (Effective Field Goal Percentage \\times 0.20) + (Defensive Efficiency \\times -0.30) + (Opponent Effective Field Goal Percentage \\times -0.20) + (Average Scoring Margin \\times 0.15)`;
 const equationInHTML = katex.renderToString(equation);
