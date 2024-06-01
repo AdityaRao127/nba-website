@@ -49,4 +49,5 @@ def predict():
     return jsonify({'team': team, 'win_probability': f"{win_probability:.3f}%"})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+    import os
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
