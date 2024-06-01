@@ -28,6 +28,10 @@ def get_success_score(team):
     success_score = team_data['Success Score'].values[0]
     return success_score
 
+@app.route('/')
+def home():
+    return "Hello, World!"
+
 @app.route('/predictions', methods=['POST'])
 def predict():
     data = request.get_json()
