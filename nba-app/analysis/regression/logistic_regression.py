@@ -9,7 +9,7 @@ Steps:
 '''
 
 # Now you can import the required modules
-from metric import all_data, statistic, avg_scoring_margin_df, defensive_efficiency_df, efg_pct_df, opponent_efg_pct_df, win_pct_df, total_df
+from metric_for_model import all_data, statistic, avg_scoring_margin_df, defensive_efficiency_df, efg_pct_df, opponent_efg_pct_df, win_pct_df, total_df
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -40,11 +40,11 @@ merged_df = pd.merge(merged_df, avg_scoring_margin_df, on=['Team', 'Year'], suff
 merged_df = pd.merge(merged_df, win_pct_df, on=['Team', 'Year'], suffixes=('', '_win_percentage'))
 
 df_combined = merged_df
-print(df_combined)
+#print(df_combined)
 
 won_champ = 0
 df_combined['Won Championship'] = 0
-print(df_combined.head())
+#print(df_combined.head())
 
 nba_teams = [
     "San Antonio", # 2004
@@ -78,8 +78,8 @@ for season in range(2004, 2025):
     else:
         df_combined.loc[(df_combined['Year'] == season) & (df_combined['Team'] != champ_winner), 'Won Championship'] = 0
 
-print("test1")
-print(df_combined.head())
+#print("test1")
+#print(df_combined.head())
 # Save the combined DataFrame to a CSV file
 df_combined.to_csv('dataframe_combined.csv', index=False)
 
@@ -121,17 +121,17 @@ sorted_teams['Success Score'] = testing_set['Success Score']
 all_teams_score = sorted_teams[['Team', 'Success Score', 'Win Probability']]
 
 # Print the top 5 teams with the highest chance of winning
-print(sorted_teams[['Team', 'Win Probability', 'Success Score']].head(10))
+#print(sorted_teams[['Team', 'Win Probability', 'Success Score']].head(10))
 
 # accuracy
 predictions = lr_model.predict(testing_set[['Success Score']])
 accuracy = round(accuracy_score(y_val, y_pred) * 100, 3)
 testing_set['Predicted Win'] = predictions
-print("Accuracy:", accuracy, "%")
+#print("Accuracy:", accuracy, "%")
 win_predicted = sorted_teams[['Team', 'Win Probability', 'Success Score']].head(1)
 win_predicted_accuracy = win_predicted['Win Probability'].values[0]
 team_name = win_predicted['Team'].values[0] 
-print(team_name, "has a predicted probability of winning the 2024 NBA Championship of", win_predicted_accuracy, "%")
+#print(team_name, "has a predicted probability of winning the 2024 NBA Championship of", win_predicted_accuracy, "%")
 
 
 
