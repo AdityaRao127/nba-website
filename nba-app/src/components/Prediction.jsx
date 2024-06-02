@@ -72,7 +72,7 @@ function Prediction() {
             <h1>🏀 Predicted Winners 2024 🏀</h1>
             <div className="form-group">
               <label>
-                Team:
+                Selcet a team:
                 <select value={team} onChange={(e) => setTeam(e.target.value)} className="team-select">
                   <option value="">Select a team</option>
                   {Object.entries(nbaTeams).map(([displayName, actualName]) => (

@@ -1,6 +1,20 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .analysis-container {
   text-align: center;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .season-buttons {
@@ -10,7 +24,7 @@
   margin-bottom: 20px;
 }
 
-.season-buttons button {
+.season-button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #007bff;
@@ -18,35 +32,45 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.season-buttons button:hover {
+.season-button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.season-button.selected {
+  background-color: #28a745;
+}
+
+.season-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .season-images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 1500px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
 }
 
 .image-container {
-  width: 100%;
+  width: 45%;
+  max-width: 500px;
 }
 
-.season-images{
-  width:600px;
-  margin-left:279px;
-}
-.season-images img{
+.season-image {
   width: 100%;
   height: auto;
   border: 1px solid #cccccc;
   border-radius: 10px;
   transition: transform 0.2s;
-  margin-right: 790px;
 }
 
 .season-image:hover {
@@ -55,25 +79,15 @@
 
 .markdown-section {
   text-align: left;
-  margin-top: 40px;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin: 0 auto;
   background-color: #333;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(111, 106, 106, 0.1);
-  position: relative;
-  top: 50px; /* adjust this value to position the markdown section correctly */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.markdown-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #333;
-  z-index: 0; 
+.markdown-section h2 {
+  color: #ffffff;
 }
