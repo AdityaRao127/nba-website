@@ -54,7 +54,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 0px;
   width: 1500px;
   max-width: 1200px;
   margin: 0 auto 40px;
@@ -62,12 +62,12 @@ body {
 
 .image-container {
   width: 45%;
-  max-width: 500px;
+  max-width: 750px;
 }
 
-.season-image {
+.season-image img{
   width: 100%;
-  height: auto;
+  height: 100%;
   border: 1px solid #cccccc;
   border-radius: 10px;
   transition: transform 0.2s;

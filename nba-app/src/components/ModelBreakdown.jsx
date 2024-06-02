@@ -11,9 +11,9 @@ import clusteringImage2 from '../images/defensive_efficiency_avg_scoring_margin.
 import katex from 'katex';
 import 'katex/dist/katex.min.css'; 
 import './ModelBreakdown.css'; 
+import { InlineMath } from 'react-katex';
 
-const equation = `(Reg. Season Win\\% \\times 0.15) + (Effective Field Goal Percentage \\times 0.20) + (Defensive Efficiency \\times -0.30) + (Opponent Effective Field Goal Percentage \\times -0.20) + (Average Scoring Margin \\times 0.15)`;
-const equationInHTML = katex.renderToString(equation);
+const equation = `(\\text{Reg. Season Win\\%} \\times 0.15) + (\\text{Effective Field Goal Percentage} \\times 0.20) + (\\text{Defensive Efficiency} \\times -0.30) + (\\text{Opponent Effective Field Goal Percentage} \\times -0.20) + (\\text{Average Scoring Margin} \\times 0.15)`;
 
 const ModelBreakdown = () => {
     return (
@@ -38,9 +38,12 @@ const ModelBreakdown = () => {
                 <h2 className="section-title">Why did I use Logistic Regression?</h2>
                 <div className="section-content">
                     <img src={logisticRegressionPic} alt="Logistic Regression" className="section-image" />
+
                     <p className="section-text">
                         I chose to use Logistic Regression for this model because it is an algorithm that works well for binary classification problems. It allows us to understand the relationship between the predictor variables and the outcome variable. In the NBA example, we used a custom, weighted success-score metric and paired it against the teams that won the championship. Here is the formula for the success metric:
-                        <span dangerouslySetInnerHTML={{ __html: equationInHTML }} />
+                        <br></br>
+                        <br></br>
+                        <InlineMath math={equation} />
                     </p>
                 </div>
             </section>
@@ -48,7 +51,7 @@ const ModelBreakdown = () => {
             <section className="section">
                 <h2 className="section-title">How does the model perform?</h2>
                 <p className="section-text">
-                    The performance of this model was evaluated using the accuracy score, and the typical accuracy outputted was around 95-96%.
+                    The performance of this model was evaluated using the accuracy score, and the typical accuracy outputted was around 95-97%.
                 </p>
             </section>
 
@@ -58,42 +61,44 @@ const ModelBreakdown = () => {
                     <div className="image-row">
                         <div className="image-container">
                             <img src={kmeansImage1} alt="K-means Image 1" className="kmeans-image" />
-                            <p className="image-description">Image 1: Description of the first K-means clustering image.</p>
+                            <p className="image-description">Examining Effective Field Goal Percentage and Opponent Effective Field Goal Percentage relation to winning regular season games</p>
                         </div>
                         <div className="image-container">
                             <img src={kmeansImage2} alt="K-means Image 2" className="kmeans-image" />
-                            <p className="image-description">Image 2: Description of the second K-means clustering image.</p>
+                            <p className="image-description">Examining Effective Field Goal Percentage and Defensive Efficiency relation to winning regular season games</p>
                         </div>
                         <div className="image-container">
                             <img src={kmeansImage3} alt="K-means Image 3" className="kmeans-image" />
-                            <p className="image-description">Image 3: Description of the third K-means clustering image.</p>
+                            <p className="image-description">Examining Effective Field Goal Percentage and Average Scoring Margin relation to winning regular season games</p>
                         </div>
                     </div>
                     <div className="image-row">
                         <div className="image-container">
                             <img src={kmeansImage4} alt="K-means Image 4" className="kmeans-image" />
-                            <p className="image-description">Image 4: Description of the fourth K-means clustering image.</p>
+                            <p className="image-description">Examining Opponent Effective Field Goal Percentage and Defensive Efficiency relation to winning regular season games</p>
                         </div>
                         <div className="image-container">
                             <img src={kmeansImage5} alt="K-means Image 5" className="kmeans-image" />
-                            <p className="image-description">Image 5: Description of the fifth K-means clustering image.</p>
+                            <p className="image-description">Examining Opponent Effective Field Goal Percentage and Average Scoring Margin relation to winning regular season games</p>
                         </div>
                         <div className="image-container">
                             <img src={kmeansImage6} alt="K-means Image 6" className="kmeans-image" />
-                            <p className="image-description">Image 6: Description of the sixth K-means clustering image.</p>
+                            <p className="image-description">Examining Defensive Efficiency and Average Scoring Margin relation to winning regular season gamesge.</p>
                         </div>
                     </div>
                 </div>
                 <div className="clustering-images">
                     <h3 className="section-subtitle">Clustering Results</h3>
+                    <p className="section-text">
+                        The clustering analysis was performed using the K-means algorithm to group teams based on the most relevant stat comparisons in the above section. This clustering relates these stats to winning championships based on regular season stats. </p>
                     <div className="image-row">
                         <div className="image-container-vertical">
                             <img src={clusteringImage1} alt="Clustering Image 1" className="clustering-image" />
-                            <p className="image-description">Description of the first clustering image.</p>
+                            <p className="image-description">Cluster 1: Play-in teams; Cluster 2: Championship Teams; Cluster 3: Playoff Teams</p>
                         </div>
                         <div className="image-container-vertical">
                             <img src={clusteringImage2} alt="Clustering Image 2" className="clustering-image" />
-                            <p className="image-description">Description of the second clustering image.</p>
+                            <p className="image-description">Cluster 1: Championship Teams; Cluster 2: Playoff teams; Cluster 3: Play-in team</p>
                         </div>
                     </div>
                 </div>
