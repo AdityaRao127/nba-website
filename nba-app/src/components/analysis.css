@@ -103,3 +103,10 @@ nav{
 .navbar li a:hover{
 background-size: 100% 0.1em;
 }
+
+.navbar ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+}
+
