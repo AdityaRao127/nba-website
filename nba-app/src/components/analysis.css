@@ -77,3 +77,29 @@
   background-color: #333;
   z-index: 0; 
 }
+
+nav{
+  width: 27%;
+  margin-right: 30px;
+}
+
+.navbar {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar li a{
+  text-decoration: none;
+  color: white;
+  background-image: linear-gradient(white, white);
+  background-size: 0% 0.1em;
+  background-position-y: 100%;
+  background-position-x: 0%;
+  background-repeat: no-repeat;
+  transition: background-size 0.2s ease-in-out;
+}
+
+.navbar li a:hover{
+background-size: 100% 0.1em;
+}
