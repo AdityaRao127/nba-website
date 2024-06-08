@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/analysis" element={<Analysis />} />
+        <Route path="/team-analysis" element={<Analysis />} />
         <Route path="/predictions" element={<Prediction />} />
         <Route path="/model-breakdown" element={<ModelBreakdown />} />
         {/* <Route path="/model-breakdown" element={<ModelBreakdown />} /> */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './analysis.css';
-import Navbar from './Navbar.jsx';
+import HeaderPages from './NewHeader.jsx';
 
 // Import images for 2004 season
 import img2004_1 from '../images/2004/Average_Scoring_Margin_vs_Win_Percentage.png';
@@ -110,7 +110,7 @@ import img2024_1 from '../images/2024/Average_Scoring_Margin_vs_Win_Percentage.p
 import img2024_2 from '../images/2024/Defensive_Efficiency_vs_Win_Percentage.png';
 import img2024_3 from '../images/2024/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2024_4 from '../images/2024/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
-import Header from './Header.jsx';
+
 
 // Define a mapping of seasons to their images
 const imagesBySeason = {
@@ -192,8 +192,8 @@ const Analysis = () => {
 
   return (
     <>
-      <Navbar/>
-      <div className='analysis-container'>
+      <HeaderPages/>
+      <div className='analysis-container' style={{marginTop:'-300px'}}> {/* main fix for making it appear at top of page without background */}
         <h1>NBA Team Analysis Past 20 Years</h1>
         <div className='season-buttons'>
           {Array.from({ length: 21 }, (_, i) => 2004 + i).map(season => (
