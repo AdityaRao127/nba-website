@@ -98,7 +98,7 @@ testing_set = df_combined.loc[df_combined['Year'] == 2024].copy()
 X = training_set[['Success Score']]
 y = training_set['Won Championship']
 
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.20, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.25)
 
 
 lr_model = LogisticRegression()

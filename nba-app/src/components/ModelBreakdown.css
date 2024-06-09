@@ -71,7 +71,7 @@ body {
 }
 
 .kmeans-image {
-    width: 100%;
+    width: 350px;
     height: auto;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -79,7 +79,7 @@ body {
 }
 
 .kmeans-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.105);
 }
 
 .image-description {
