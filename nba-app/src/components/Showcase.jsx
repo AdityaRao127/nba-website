@@ -9,7 +9,7 @@ const Showcase = () => {
   const navigate = useNavigate();
 
   const handleTeamAnalysisClick = () => {
-    navigate('/analysis');
+    navigate('/team-analysis');
   };
 
   const handlePredictionClick = () => {
