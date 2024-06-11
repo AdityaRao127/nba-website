@@ -193,7 +193,7 @@ const Analysis = () => {
   return (
     <>
       <HeaderPages/>
-      <div className='analysis-container' style={{marginTop:'-300px'}}> {/* main fix for making it appear at top of page without background */}
+      <div className="analysis-container" style={{marginTop:'-300px'}}> {/* main fix for making it appear at top of page without background */}
         <h1>NBA Team Analysis Past 20 Years</h1>
         <div className='season-buttons'>
           {Array.from({ length: 21 }, (_, i) => 2004 + i).map(season => (

@@ -78,7 +78,7 @@
   z-index: 0; 
 }
 
-.header.container{
+/* .header.container{
   height: 400px;
   width: 100%;
   background-image: url("/src/images/nba.jpeg");
@@ -125,10 +125,6 @@ nav{
 
 .navbar li a:hover{
 background-size: 100% 0.1em;
-}
+} */
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
+
