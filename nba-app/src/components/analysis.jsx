@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './analysis.css';
+import HeaderPages from './NewHeader.jsx';
 
-
+// Import images for 2004 season
 import img2004_1 from '../images/2004/Average_Scoring_Margin_vs_Win_Percentage.png';
 import img2004_2 from '../images/2004/Defensive_Efficiency_vs_Win_Percentage.png';
 import img2004_3 from '../images/2004/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2004_4 from '../images/2004/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 
+
 import img2005_1 from '../images/2005/Average_Scoring_Margin_vs_Win_Percentage.png';
 import img2005_2 from '../images/2005/Defensive_Efficiency_vs_Win_Percentage.png';
 import img2005_3 from '../images/2005/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2005_4 from '../images/2005/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
+
 
 import img2006_1 from '../images/2006/Average_Scoring_Margin_vs_Win_Percentage.png';
 import img2006_2 from '../images/2006/Defensive_Efficiency_vs_Win_Percentage.png';
@@ -108,6 +111,7 @@ import img2024_2 from '../images/2024/Defensive_Efficiency_vs_Win_Percentage.png
 import img2024_3 from '../images/2024/Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 import img2024_4 from '../images/2024/Opponent_Effective_Field_Goal_Percentage_vs_Win_Percentage.png';
 
+
 // Define a mapping of seasons to their images
 const imagesBySeason = {
   2004: [img2004_1, img2004_2, img2004_3, img2004_4],
@@ -132,11 +136,11 @@ const imagesBySeason = {
   2023: [img2023_1, img2023_2, img2023_3, img2023_4],
   2024: [img2024_1, img2024_2, img2024_3, img2024_4],
 };
-
 const markdownBySeason = {
   2004: `**2004 Statistical Trends:** 
   * Peterson's Coefficient: Closer to 1 = statistically significant. Closer to 0 = not significant.
     * Defensive Efficiency was somewhat related to win percentage. Overall, better defensive teams had a higher win percentage.
+
   `,
   2005: 'Markdown content for 2005 season',
   2006: 'Markdown content for 2006 season',
@@ -148,7 +152,7 @@ const markdownBySeason = {
   2012: 'Markdown content for 2012 season',
   2013: 'Markdown content for 2013 season',
   2014: 'Markdown content for 2014 season',
-  2015: `**2015 Statistical Trends:** 
+  2015: `**2015 Statitical Trends:** 
   * Peterson's Coefficient: Closer to 1 = statistically significant. Closer to 0 = not significant.
     * Defensive Efficiency was somewhat related to win percentage. Overall, better defensive teams had a higher win percentage.
     * Stephen Curry Effect: EFG went up and better shooting teams started to win championships. Clusters do not fit as well here.
@@ -187,16 +191,17 @@ const Analysis = () => {
   };
 
   return (
-    <div className='analysis-container'>
-      <h1>NBA Team Analysis Past 20 Years</h1>
-      <div className='season-buttons'>
-        {Array.from({ length: 21 }, (_, i) => 2004 + i).map(season => (
-          <button key={season} onClick={() => handleSeasonClick(season)} className={`season-button ${selectedSeason === season ? 'selected' : ''}`}>
-            {season}
-          </button>
-        ))}
-      </div>
-      <div className='season-content'>
+    <>
+      <HeaderPages/>
+      <div className="analysis-container" style={{marginTop:'-300px'}}> {/* main fix for making it appear at top of page without background */}
+        <h1>NBA Team Analysis Past 20 Years</h1>
+        <div className='season-buttons'>
+          {Array.from({ length: 21 }, (_, i) => 2004 + i).map(season => (
+            <button key={season} onClick={() => handleSeasonClick(season)}>
+              {season}
+            </button>
+          ))}
+        </div>
         <div className='season-images'>
           {renderImages()}
         </div>
@@ -206,7 +211,7 @@ const Analysis = () => {
           </ReactMarkdown>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

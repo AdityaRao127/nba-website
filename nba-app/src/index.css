@@ -42,7 +42,7 @@ code {
 }
 
 nav{
-  width: 30%;
+  width: 27%;
   margin-right: 30px;
 }
 
@@ -66,8 +66,6 @@ nav{
 .navbar li a:hover{
 background-size: 100% 0.1em;
 }
-
-
 
 .showcase {
   margin-top: 50px;
