@@ -68,63 +68,66 @@ function Prediction() {
     };
 
     return (
-        <div className="prediction-container">
-          <form onSubmit={handleSubmit} className="prediction-form">
-            <h1>🏀 Predicted Winners 2024 🏀</h1>
-            <div className="form-group">
-              <label>
-                Team:
-                <select value={team} onChange={(e) => setTeam(e.target.value)} className="team-select">
-                  <option value="">Select a team</option>
-                  {Object.entries(nbaTeams).map(([displayName, actualName]) => (
-                    <option key={actualName} value={actualName}>
-                      {displayName}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-            <button type="submit" className="submit-button">Predict</button>
-          </form>
-          {loading ? (
-            <div className="loading-container">
-              <p>Loading...</p>
-            </div>
-          ) : (
-            prediction && (
-              <div className="prediction-result">
-                <h2>Prediction</h2>
-                <p className="team-name">Team: {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)}</p>
-                <p className="win-probability">Win Probability: {prediction.win_probability}</p>
-                {parseFloat(prediction.win_probability) < 0.4 && (
-                  <div className="result-section">
-                    <p>The {prediction.team} are going to be battling for a high draft pick!</p>
-                    <p>Good luck in the draft!</p>
-                    <img src={nba_draft} alt="Draft" className="result-image" />
-                  </div>
-                )}
-                {parseFloat(prediction.win_probability) >= 0.4 && parseFloat(prediction.win_probability) < 5 && (
-                  <div className="result-section">
-                    <p>Looks like the {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} will be fighting for a play-in spot!</p>
-                    <img src={playin_logo} alt="Play-in" className="result-image" />
-                  </div>
-                )}
-                {parseFloat(prediction.win_probability) >= 5 && parseFloat(prediction.win_probability) < 10.5 && (
-                  <div className="result-section">
-                    <p>{Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} will be battling in the playoffs!</p>
-                    <img src={playoff_logo} alt="Playoffs" className="result-image" />
-                  </div>
-                )}
-                {parseFloat(prediction.win_probability) >= 10.5 && (
-                  <div className="result-section">
-                    <p>Looks like {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} are serious championship contenders!</p>
-                    <img src={larry_trophy} alt="Championship" className="result-image" />
-                  </div>
-                )}
+        <>
+          <HeaderPages/>
+          <div className="prediction-container" style={{marginTop:'-300px'}}>
+            <form onSubmit={handleSubmit} className="prediction-form">
+              <h1>🏀 Predicted Winners 2024 🏀</h1>
+              <div className="form-group">
+                <label>
+                  Team:
+                  <select value={team} onChange={(e) => setTeam(e.target.value)} className="team-select">
+                    <option value="">Select a team</option>
+                    {Object.entries(nbaTeams).map(([displayName, actualName]) => (
+                      <option key={actualName} value={actualName}>
+                        {displayName}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
-            )
-          )}
-        </div>
+              <button type="submit" className="submit-button">Predict</button>
+            </form>
+            {loading ? (
+              <div className="loading-container">
+                <p>Loading...</p>
+              </div>
+            ) : (
+              prediction && (
+                <div className="prediction-result">
+                  <h2>Prediction</h2>
+                  <p className="team-name">Team: {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)}</p>
+                  <p className="win-probability">Win Probability: {prediction.win_probability}</p>
+                  {parseFloat(prediction.win_probability) < 0.4 && (
+                    <div className="result-section">
+                      <p>The {prediction.team} are going to be battling for a high draft pick!</p>
+                      <p>Good luck in the draft!</p>
+                      <img src={nba_draft} alt="Draft" className="result-image" />
+                    </div>
+                  )}
+                  {parseFloat(prediction.win_probability) >= 0.4 && parseFloat(prediction.win_probability) < 5 && (
+                    <div className="result-section">
+                      <p>Looks like the {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} will be fighting for a play-in spot!</p>
+                      <img src={playin_logo} alt="Play-in" className="result-image" />
+                    </div>
+                  )}
+                  {parseFloat(prediction.win_probability) >= 5 && parseFloat(prediction.win_probability) < 10.5 && (
+                    <div className="result-section">
+                      <p>{Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} will be battling in the playoffs!</p>
+                      <img src={playoff_logo} alt="Playoffs" className="result-image" />
+                    </div>
+                  )}
+                  {parseFloat(prediction.win_probability) >= 10.5 && (
+                    <div className="result-section">
+                      <p>Looks like {Object.keys(nbaTeams).find(key => nbaTeams[key] === prediction.team)} are serious championship contenders!</p>
+                      <img src={larry_trophy} alt="Championship" className="result-image" />
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        </>
     );
 }
 
