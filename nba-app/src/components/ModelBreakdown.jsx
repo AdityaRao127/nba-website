@@ -13,8 +13,7 @@ import 'katex/dist/katex.min.css';
 import './ModelBreakdown.css'; 
 import HeaderPages from './NewHeader.jsx';
 
-// example change
-// make a change
+
 const equation = `(Reg. Season Win\\% \\times 0.15) + (Effective Field Goal Percentage \\times 0.20) + (Defensive Efficiency \\times -0.30) + (Opponent Effective Field Goal Percentage \\times -0.20) + (Average Scoring Margin \\times 0.15)`;
 const equationInHTML = katex.renderToString(equation);
 
@@ -63,42 +62,43 @@ const ModelBreakdown = () => {
                         <div className="image-row">
                             <div className="image-container">
                                 <img src={kmeansImage1} alt="K-means Image 1" className="kmeans-image" />
-                                <p className="image-description">Image 1: Description of the first K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Opponent EFG% vs. EFG%</p>
                             </div>
                             <div className="image-container">
                                 <img src={kmeansImage2} alt="K-means Image 2" className="kmeans-image" />
-                                <p className="image-description">Image 2: Description of the second K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Defensive Efficiency vs. EFG%</p>
                             </div>
                             <div className="image-container">
                                 <img src={kmeansImage3} alt="K-means Image 3" className="kmeans-image" />
-                                <p className="image-description">Image 3: Description of the third K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Average Scoring Margin vs. EFG%</p>
                             </div>
                         </div>
                         <div className="image-row">
                             <div className="image-container">
                                 <img src={kmeansImage4} alt="K-means Image 4" className="kmeans-image" />
-                                <p className="image-description">Image 4: Description of the fourth K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Defensive Efficiency vs. Opponent EFG%.</p>
                             </div>
                             <div className="image-container">
                                 <img src={kmeansImage5} alt="K-means Image 5" className="kmeans-image" />
-                                <p className="image-description">Image 5: Description of the fifth K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Average Scoring Margin vs. Opponent EFG%.</p>
                             </div>
                             <div className="image-container">
                                 <img src={kmeansImage6} alt="K-means Image 6" className="kmeans-image" />
-                                <p className="image-description">Image 6: Description of the sixth K-means clustering image.</p>
+                                <p className="image-description">Comparisons across Average Scoring Margin vs. Defensive Efficiency.</p>
                             </div>
                         </div>
                     </div>
                     <div className="clustering-images">
                         <h3 className="section-subtitle">Clustering Results</h3>
+                        <h4 className="section-subtitle">Pick the two best clusters, after analyzing the 6 clustering results above.</h4>
                         <div className="image-row">
                         <div className="image-container-vertical">
                                 <img src={clusteringImage1} alt="Clustering Image 1" className="clustering-image" />
-                                <p className="image-description">Description of the first clustering image.</p>
+                                <p className="image-description">Assigning teams to clusters based on Opponent EFG% vs. EFG%.</p>
                             </div>
                             <div className="image-container-vertical">
                                 <img src={clusteringImage2} alt="Clustering Image 2" className="clustering-image" />
-                                <p className="image-description">Description of the second clustering image.</p>
+                                <p className="image-description">Assigning teams to clusters based on Average Scoring Margin vs. Defensive Efficiency.</p>
                             </div>
                         </div>
                     </div>
