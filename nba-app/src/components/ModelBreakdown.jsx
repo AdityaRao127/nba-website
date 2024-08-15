@@ -27,7 +27,7 @@ const ModelBreakdown = () => {
                 <section className="section">
                     <h2 className="section-title">Determining the Features and Collecting the Data</h2>
                     <p className="section-text">
-                        The first step in building our model was to determine the features that would be most indicative of a team's success. We collected data on various metrics such as Regular Season Win Percentage, Effective Field Goal Percentage, Defensive Efficiency, Opponent Effective Field Goal Percentage, and Average Scoring Margin. This data was collected from the NBA seasons spanning from 2004 to 2023.
+                        The first step in building our model was to determine the features that would be most indicative of a team's success. We collected data on various metrics such as Regular Season Win Percentage, Effective Field Goal Percentage, Defensive Efficiency, Opponent Effective Field Goal Percentage, and Average Scoring Margin. This data was collected from the NBA seasons spanning from 2004 to 2024.
                     </p>
                 </section>
 
