@@ -5,7 +5,7 @@
 Frontend: React.js (Vite), Flask, HTML/CSS
 Model/Analysis/Backend: Python: Scikit-learn, scipy, matplotlib. Backend: Flask. Frontend: React + Vite (Javascript, HTML/CSS)
 
-Deployment: Docker, AWS (shifted because of limitations due to free tier)
+Deployment: Docker, Render (shifted because of limitations due to free tier)
 
 
 ## Overview
